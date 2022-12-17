@@ -58,3 +58,54 @@ describe('feed', () => {
         expect(pet.hunger).toEqual(0);
     });
 });
+describe('checkup', () => {
+    it('Return results of checkup based on Hunger and Fitness', () => {
+        const pet = new Pet('Fido');
+        pet.checkup();
+        expect(pet.checkupResult).toEqual("I feel great")
+        pet.growUp();
+        pet.growUp();
+        pet.growUp();
+        console.log("Fido Hunger: "+pet.hunger);
+        console.log("Fido Fitness: "+pet.fitness);
+        pet.checkup();
+        console.log("Fido Checkup Result: "+pet.checkupResult);
+        expect(pet.checkupResult).toEqual("I am hungry AND I need a walk")
+        pet.feed();
+        pet.feed();
+        pet.feed();
+        pet.feed();
+        console.log("Fido Hunger: "+pet.hunger);
+        console.log("Fido Fitness: "+pet.fitness);
+        pet.checkup();
+        console.log("Fido Checkup Result: "+pet.checkupResult);
+        expect(pet.checkupResult).toEqual("I need a walk")
+        pet.growUp();
+        pet.walk();
+        pet.walk();
+        console.log("Fido Hunger: "+pet.hunger);
+        console.log("Fido Fitness: "+pet.fitness);
+        pet.checkup();
+        console.log("Fido Checkup Result: "+pet.checkupResult);
+        expect(pet.checkupResult).toEqual("I am hungry")
+        pet.feed();
+        pet.feed();
+        pet.feed();
+        pet.walk();
+        console.log("Fido Hunger: "+pet.hunger);
+        console.log("Fido Fitness: "+pet.fitness);
+        pet.checkup();
+        console.log("Fido Checkup Result: "+pet.checkupResult);
+        expect(pet.checkupResult).toEqual("I feel great")
+    });
+});
+describe('isAlive', () => {
+    it('returns isAlive as true or false', () => {
+        const pet = new Pet('Fido');
+        expect(pet.isAlive).toEqual(true);
+        pet.growUp();
+        pet.growUp();
+        pet.growUp();
+        expect(pet.isAlive).toEqual(false);
+    });
+});
