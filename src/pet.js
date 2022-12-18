@@ -19,25 +19,38 @@ Pet.prototype = {
     get isAlive() {
         return this.age < 30 && this.hunger < 10 && this.fitness > 0;
     }
-};
+}
 Pet.prototype.growUp = function() {
-    this.age += GROWUP_AGE;
-    this.hunger += GROWUP_HUNGER;
-    this.fitness -= GROWUP_FITNESS;
+    if (!this.isAlive) {
+        throw new Error('Your pet is no longer alive :(');
+    } else {
+        this.age += GROWUP_AGE;
+        this.hunger += GROWUP_HUNGER;
+        this.fitness -= GROWUP_FITNESS;
+    };
 };
 Pet.prototype.walk = function() {
+    if (!this.isAlive) {
+        throw new Error('Your pet is no longer alive :(');
+    };
     this.fitness += WALK_FITNESS;
     if (this.fitness > MAXIMUM_FITNESS) {
         this.fitness = MAXIMUM_FITNESS;
     }
 };
 Pet.prototype.feed = function() {
+    if (!this.isAlive) {
+        throw new Error('Your pet is no longer alive :(');
+    };
     this.hunger -= FEED_HUNGER;
     if (this.hunger < MINIMUM_HUNGER) {
         this.hunger = MINIMUM_HUNGER;
     }
 };
 Pet.prototype.checkup = function() {
+    if (!this.isAlive) {
+        throw new Error('Your pet is no longer alive :(');
+    };
     if (this.fitness > 3 && this.hunger < 5) {
         this.checkupResult = "I feel great";
     } else if (this.fitness < 4 && this.hunger > 4) {
